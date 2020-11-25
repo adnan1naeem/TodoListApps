@@ -1,19 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 import {Button,TextInput} from 'react-native-paper'
+
 let id=0;
 export default function App() {
   const [todoItem,setItem]=React.useState('');
   const [todoList,setTodoList]=React.useState([]);
-  
-const  InputHandler=(value)=>setItem(value);
+  const  InputHandler=(value)=>setItem(value);
 
 const  AddItem=()=>{
   setItem("");
-  console.log('list',todoList);
   todoList.push({name:todoItem,id:id++});
-  console.log(todoList);
   setTodoList([...todoList]);
 }
 
@@ -30,7 +27,7 @@ const  DeleteItem=(id)=>()=>{
         value={todoItem}
         onChangeText={InputHandler}
       />
-    <Button style={styles.margin} mode="contained"  title="Add" onPress={AddItem}>Add</Button>
+    <Button disabled={!todoItem} style={styles.margin} mode="contained"  title="Add" onPress={AddItem}>Add</Button>
     {
     todoList.length>0
     ?
@@ -38,7 +35,7 @@ const  DeleteItem=(id)=>()=>{
       return(
         <View  key={index} style={{flexDirection:'row'}}>
           <Text>{item.name}</Text>
-          <Button title="X"  onPress={DeleteItem(item.id)}>X</Button>
+          <Button  title="X"  onPress={DeleteItem(item.id)}>X</Button>
         </View>
       );    
     })
